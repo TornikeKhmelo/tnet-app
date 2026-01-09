@@ -18,8 +18,8 @@ import styled from 'styled-components';
     flex-direction: column;
     align-items: flex-start;
     max-width: 400px;
-    margin: 0 auto;
     margin-bottom: 20px;
+    padding: 0 16px;
   }
 `;
 

@@ -5,7 +5,7 @@ export const FilterChipsContainer = styled.div`
   gap: 8px;
   max-width:400px;
   overflow-x: auto;
-  padding: 8px 12px;
+  padding: 8px 16px;
 
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
