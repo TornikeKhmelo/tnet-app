@@ -30,7 +30,6 @@ export const formatDate = (dateString?: string | number) => {
     return '';
   }
   
-  // Check if date is valid
   if (isNaN(date.getTime())) {
     console.warn('Invalid date:', dateString);
     return '';
@@ -40,7 +39,6 @@ export const formatDate = (dateString?: string | number) => {
   const diffTime = now.getTime() - date.getTime();
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
   
-  // Handle same day or future dates
   if (diffDays < 0) return 'დღეს';
   if (diffDays === 0) {
     const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
@@ -79,3 +77,9 @@ export const fuelTypes = {
   6:"ჰიბრიდი",
   8:"თხევადი გაზი"
 }
+
+export const vehicleTypeToId: { [key: string]: number } = {
+  'car': 0,
+  'tractor': 1,
+  'motorcycle': 2
+};
