@@ -11,6 +11,16 @@ import styled from 'styled-components';
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
 `;
 
  export const StatsText = styled.span`
@@ -30,9 +40,12 @@ import styled from 'styled-components';
 
 
  export const MainContent = styled.div`
+  display: flex;
+  gap: 30px;
 
-display: flex;
-gap: 30px;
+  @media (max-width: 768px) {
+    gap: 0;
+  }
 `;
  export const ContentWrapper = styled.div`
 max-width: 1080px;
@@ -46,10 +59,13 @@ margin: 0 auto;
  export const ProductsGrid = styled.div<{ isLoading?: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 16px;
   opacity: ${props => props.isLoading ? 0.5 : 1};
   transition: opacity 0.3s ease;
   pointer-events: ${props => props.isLoading ? 'none' : 'auto'};
+  @media (max-width: 768px) {
+  padding: 0 16px
+  }
 `;
 
  export const LoadingText = styled.div`

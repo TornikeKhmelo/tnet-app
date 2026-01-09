@@ -53,7 +53,8 @@ export const useProducts = ({
         });
         params.Mans = manModelPairs.join('-');
       } else {
-        params.Mans = manufacturers.join(',');
+        // Use dashes for manufacturer IDs when no models are selected
+        params.Mans = manufacturers.filter(m => m !== '').join('-');
       }
     }
 

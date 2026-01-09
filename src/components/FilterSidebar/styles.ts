@@ -13,6 +13,10 @@ export const SidebarContainer = styled.div`
   border: 1px solid #E2E5EB;
   height: fit-content;
   z-index: 99999;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const FilterGroup = styled.div`

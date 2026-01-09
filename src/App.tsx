@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header/Header';
 import FilterSidebar from './components/FilterSidebar/FilterSidebar';
+import MobileFilterSidebar from './components/FilterSidebar/MobileFilterSidebar';
+import FilterButton from './components/FilterSidebar/FilterButton';
 import Breadcrumb from './components/Breadcrumb/Breadcrumb';
 import CustomDropdown from './components/CustomDropdown/CustomDropdown';
 import Pagination from './components/Pagination/Pagination';
@@ -8,8 +10,11 @@ import { AppContainer, ContentWrapper, MainContent, ProductsContainer, ErrorText
 import { useMainLogic } from './hooks/useMainLogic';
 import { renderProductsContent } from './utils/renderUtils';
 import { periodOptions, sortOptions } from './utils/dropdownOptions';
+import { countActiveFilters, removeFilter } from './utils/filterUtils';
+import FilterChips from './components/FilterChips';
 
 const App = () => {
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const {
     loading,
     error,
@@ -17,6 +22,7 @@ const App = () => {
     filters,
     sortOrder,
     totalCount,
+    filterCount,
     currentPage,
     vehicleType,
     manufacturers,
@@ -41,7 +47,7 @@ const App = () => {
             filters={filters}
             onFilterChange={handleFilterChange}
             onSearch={handleSearch}
-            resultCount={totalCount}
+            resultCount={filterCount ?? totalCount}
             manufacturers={manufacturers}
             categories={categories}
             vehicleType={vehicleType}
@@ -50,8 +56,23 @@ const App = () => {
           
           <ProductsContainer>
             {error && <ErrorText>{error}</ErrorText>}
+            <FilterChips
+              filters={filters}
+              manufacturers={manufacturers}
+              categories={categories}
+              modelsMap={modelsMap}
+              onRemoveFilter={(type, value) => {
+                handleFilterChange(removeFilter(filters, type, value));
+              }}
+            />
              <StatsBar>
-              <StatsText>{totalCount.toLocaleString('ka-GE')} განცხადება</StatsText>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                <FilterButton 
+                  onClick={() => setIsMobileFilterOpen(true)}
+                  activeFiltersCount={countActiveFilters(filters)}
+                />
+                <StatsText>{filterCount?.toLocaleString('ka-GE') ?? totalCount.toLocaleString('ka-GE')} განცხადება</StatsText>
+              </div>
               <DropdownWrapper>
                 <CustomDropdown
                   options={periodOptions}
@@ -91,6 +112,16 @@ const App = () => {
         </MainContent>
         </ContentWrapper>
       </div>
+      <MobileFilterSidebar
+        isOpen={isMobileFilterOpen}
+        onClose={() => setIsMobileFilterOpen(false)}
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        onSearch={handleSearch}
+        resultCount={filterCount ?? totalCount}
+        manufacturers={manufacturers}
+        categories={categories}
+      />
     </AppContainer>
   );
 }

@@ -1,13 +1,12 @@
 import React from 'react'
-import { CustomsText, InfoRow, Title } from './styles'
+import { CustomsText, DesktopActions, InfoRow, Title } from './styles'
 import { Manufacturer, Model, Product } from '../../types'
 import { resolveModelName } from '../../utils/productUtils'
 
-const TopInfo = ({product, manufacturers, models}: {product: Product, manufacturers: Manufacturer[], models: Model[]}) => {
-  const resolvedModelName = resolveModelName(product, manufacturers, models);
+const TopInfo = ({product,resolvedModelName}: {product: Product, resolvedModelName: string}) => {
   return (
     <div className="flex justify-between items-center gap-2 mb-4">
-          <div className="flex items-center gap-2">
+          <div className="hidden min-[769px]:flex items-center gap-2">
             {product.for_rent && (
             <div className="p-1 border rounded-lg text-xs" color='#272A37'>
               ქირავდება
@@ -16,7 +15,7 @@ const TopInfo = ({product, manufacturers, models}: {product: Product, manufactur
             <Title>{resolvedModelName}</Title>
             <span>{product.prod_year} წ</span>
           </div>
-
+          <DesktopActions>
           <InfoRow>
             {product.customs_passed ? (
               <CustomsText isPassed={true}>განბაჟებული</CustomsText>
@@ -28,6 +27,7 @@ const TopInfo = ({product, manufacturers, models}: {product: Product, manufactur
             <img src="/flagGeo.svg" alt="Location" />
             <p className="font-norma text-xs" color='#6F7383'>თბილისი</p>
           </InfoRow>
+          </DesktopActions>
         </div>
   )
 }

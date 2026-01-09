@@ -22,8 +22,8 @@ export const api = {
     return response.data;
   },
 
-  // with filters
-  getProducts: async (params = {}) => {
+  // Build query params helper
+  buildQueryParams: (params = {}) => {
     const queryParams = new URLSearchParams();
     
     if (params.ForRent !== undefined) {
@@ -57,6 +57,13 @@ export const api = {
       queryParams.append('TypeID', params.TypeID);
     }
 
+    return queryParams;
+  },
+
+  // with filters
+  getProducts: async (params = {}) => {
+    const queryParams = api.buildQueryParams(params);
+
     try {
       const response = await axios.get(`${API_BASE}/products/?${queryParams.toString()}`, {
         headers: {
@@ -66,6 +73,23 @@ export const api = {
       return response.data;
     } catch (error) {
       console.error('API Error:', error);
+      throw error;
+    }
+  },
+
+  // Get products count
+  getProductsCount: async (params = {}) => {
+    const queryParams = api.buildQueryParams(params);
+
+    try {
+      const response = await axios.get(`${API_BASE}/products/count?${queryParams.toString()}`, {
+        headers: {
+          'Accept': 'application/json',
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('API Count Error:', error);
       throw error;
     }
   },

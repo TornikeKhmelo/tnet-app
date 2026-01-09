@@ -3,6 +3,7 @@ import { useStaticData } from './useStaticData';
 import { useFilters } from './useFilters';
 import { useProducts } from './useProducts';
 import { useSorting } from './useSorting';
+import { useFilterCount } from './useFilterCount';
 
 export const useMainLogic = () => {
   const { manufacturers, categories } = useStaticData();
@@ -22,6 +23,11 @@ export const useMainLogic = () => {
     onPageReset: () => setCurrentPage(1),
   });
 
+  const { filterCount } = useFilterCount({
+    filters,
+    vehicleType,
+    sortOrder,
+  });
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   const handlePageChange = (page: number) => {
@@ -46,6 +52,7 @@ export const useMainLogic = () => {
     filters,
     sortOrder,
     totalCount,
+    filterCount,
     currentPage,
     vehicleType,
     manufacturers,

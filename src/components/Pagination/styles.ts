@@ -9,6 +9,11 @@ export const PaginationContainer = styled.div`
   background: white;
   border-radius: 8px;
   margin-top: 20px;
+
+  @media (max-width: 768px) {
+  max-width: 400px;
+  margin: 0 auto;
+}
 `;
 
 export const PaginationButton = styled.button<{ isActive?: boolean; disabled?: boolean }>`

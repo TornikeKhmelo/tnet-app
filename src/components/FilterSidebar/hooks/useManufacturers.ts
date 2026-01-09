@@ -30,13 +30,18 @@ export const useManufacturers = ({
   }, [filters.manufacturer]);
 
   const handleToggle = (manId: string) => {
-    setSelectedManufacturers((prev) =>
-      prev.includes(manId) ? prev.filter((id) => id !== manId) : [...prev, manId],
-    );
+    const newSelectedManufacturers = selectedManufacturers.includes(manId)
+      ? selectedManufacturers.filter((id) => id !== manId)
+      : [...selectedManufacturers, manId];
+
+    setSelectedManufacturers(newSelectedManufacturers);
+    onFilterChange({
+      ...filters,
+      manufacturer: newSelectedManufacturers.length > 0 ? newSelectedManufacturers : '',
+    });
   };
 
   const handleSelect = () => {
-    onFilterChange({ ...filters, manufacturer: selectedManufacturers });
     setIsOpen(false);
     setSearchTerm('');
   };

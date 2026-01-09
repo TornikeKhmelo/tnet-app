@@ -5,6 +5,12 @@ export const BreadcrumbContainer = styled.div`
   margin-bottom: 20px;
   font-weight: 400;
   font-family: 'Helvetica Neue LT GEO', sans-serif;
+    @media (max-width: 768px) {
+   max-width: 400px;
+   margin: 0 auto;
+   margin-bottom: 20px;
+   padding: 0 16px
+  }
 `;
 
 export const BreadcrumbLink = styled.span<{ active?: boolean }>`

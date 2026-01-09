@@ -23,6 +23,8 @@ gap: 16px;
   flex-direction: column;
   padding: 12px;
   gap: 12px;
+  max-width: 400px;
+  margin: 0 auto;
 }
 `;
 
@@ -36,8 +38,9 @@ background: #f0f0f0;
 flex-shrink: 0;
 
 @media (max-width: 768px) {
-  width: 100%;
-  height: 200px;
+  width: 345px;
+  height: 260px;
+  margin: 0 auto;
 }
 `;
 
@@ -54,6 +57,9 @@ flex: 1;
 display: flex;
 flex-direction: column;
 min-width: 0;
+@media (max-width: 769px) {
+  padding: 0 16px;
+}
 `;
 
 export const VIPBadge = styled.div`
@@ -98,14 +104,20 @@ margin-bottom: 12px;
 font-size: 12px;
 color: #1B1D25;
 flex-wrap: wrap;
-max-width:400px
+max-width:400px;
+@media (max-width: 769px) {
+justify-content: space-between;
 `;
+
 
 export const SpecItem = styled.div`
 display: flex;
 align-items: center;
 gap: 4px;
-min-width: 180px
+min-width: 180px;
+@media (max-width: 769px) {
+min-width: 105px;
+}
 `;
 
 
@@ -113,10 +125,6 @@ export const Price = styled.div`
 font-size: 20px;
 font-weight: 500;
 color: #272A37;
-
-@media (max-width: 768px) {
-  display: none;
-}
 `;
 
 export const StatusTags = styled.div`
@@ -156,6 +164,9 @@ export const Actions = styled.div`
 display: flex;
 gap: 12px;
 align-items: center;
+@media (max-width: 769px) {
+  display: none;
+}
 `;
 
 export const ActionButton = styled.button`
@@ -176,4 +187,35 @@ transition: opacity 0.2s;
 export const ActionIcon = styled.img`
 width: 16px;
 height: 16px;
+`;
+
+export const CurrencyBadge = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #E5E5E5;
+  font-size: 14px;
+  font-weight: 500;
+  color: #272A37;
+  flex-shrink: 0;
+`;
+
+export const MobileActions = styled.div`
+display: none;
+@media (max-width: 769px) {
+  display: flex;
+  flex-direction: column;
+  gap:12px;
+  padding:0 16px
+}
+`;
+
+export const DesktopActions = styled.div`
+display: flex;
+@media (max-width: 769px) {
+  display: none;
+}
 `;
